@@ -80,14 +80,6 @@ delete:
               value:
                 status: 0
                 message: "Required role is not assigned to this group."
-            'Required role does not exist.':
-              value:
-                status: 0
-                message: "Required role does not exist."
-            'Invalid organization token.':
-              value:
-                status: 0
-                message: "Invalid organization token."
             'Required group does not exist.':
               value:
                 status: 0
@@ -104,6 +96,7 @@ delete:
               value:
                 status: 0
                 message: "Session token expired."
+
     '403':
       description: If organization user is not admin of that organization it receives the following response.
       content:

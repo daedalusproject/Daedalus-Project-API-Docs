@@ -1,0 +1,10 @@
+type: object
+properties:
+  name:
+    type: string
+  token:
+    type: string
+  groups:
+    type: array
+    items:
+      $ref: '#/components/schemas/OrganizationGroup'

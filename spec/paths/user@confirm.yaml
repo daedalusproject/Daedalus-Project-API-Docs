@@ -1,0 +1,93 @@
+post:
+  operationId: confirm-user
+  tags:
+    - User
+  summary: Confirm User Registration
+  description: Registered users must activate their account.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - auth_token
+            - password
+          properties:
+            password:
+              type: string
+            auth_token:
+              type: string
+        examples:
+          '0':
+            value:
+          '1':
+            value:
+              auth_token: "invaid_token"
+          '2':
+            value:
+              auth_token: "ubV8bzBc4utKXtyDQIJ7em1OQuP2FUUo4rb9nXwRoq8jr3e9dwzfSNqrSHvShMc"
+          '3':
+            value:
+              auth_token: "ubV8bzBc4utKXtyDQIJ7em1OQuP2FUUo4rb9nXwRoq8jr3e9dwzfSNqrSHvShMc"
+              password: "poorone"
+          '4':
+            value:
+              auth_token: "ubV8bzBc4utKXtyDQIJ7em1OQuP2FUUo4rb9nXwRoq8jr3e9dwzfSNqrSHvShMc"
+              password: "val1d_Pa55w0rd"
+          '5':
+            value:
+              auth_token: "ubV8bzBc4utKXtyDQIJ7em1OQuP2FUUo4rb9nXwRoq8jr3e9dwzfSNqrSHvShMc"
+              password: "val1d_Pa55w0rd"
+  responses:
+    '200':
+      description: Correct response, auth and correct password are provided
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 1
+                message: "Account activated."
+    '400':
+      description: Failed examples, incorrect data.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "Invalid Auth Token."
+            '1':
+              value:
+                status: 0
+                message: "Invalid Auth Token."
+            '2':
+              value:
+                status: 0
+                message: "Invalid Auth Token."
+            '3':
+              value:
+                status: 0
+                message: "Valid Auth Token found, enter your new password."
+            '4':
+              value:
+                status: 0
+                message: "Password is invalid."
+            '5':
+              value:
+                status: 0
+                message: "Invalid Auth Token."

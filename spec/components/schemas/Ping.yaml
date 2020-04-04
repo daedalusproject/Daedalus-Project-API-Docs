@@ -1,0 +1,4 @@
+description: Ping status
+type: string
+format: test
+example: pong

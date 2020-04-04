@@ -1,0 +1,140 @@
+get:
+  operationId: registered-user
+  tags:
+    - User
+  summary: Show Registered Users
+  description: Admin users are allowed to see their registered users.
+  security:
+    - token_security: []
+  responses:
+    '200':
+      description: Success response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+              data:
+                type: object
+                required:
+                  - inactive_users
+                properties:
+                  inactive_users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserData'
+              _hidden_data:
+                type: object
+                properties:
+                  inactive_users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HiddenUserData'
+                  user:
+                    type: object
+                    $ref: '#/components/schemas/HiddenUserData'
+          examples:
+            '0':
+              value:
+                status: 1
+                data:
+                  registered_users:
+                    john@daedalus-project.io: 
+                      name: "John"
+                      surname: "The Ripper"
+                      active: 0
+                      is_admin: 0
+                      email: "john@daedalus-project.io"
+                      token: "omzMdKjAxfntYLKk0J3LBfAABFO8sp14"
+                _hidden_data:
+                  registered_users:
+                    john@daedalus-project.io:
+                      id: 2
+                      is_super_admin: 0
+                      auth_token: "ubV8bzBc4utKXtyDQIJ7em1OQuP2FUUo4rb9nXwRoq8jr3e9dwzfSNqrSHvShMc"
+                  user:
+                    is_super_admin: 1
+                    id: 1
+            '1':
+              value:
+                status: 1
+                data:
+                  registered_users:
+                    john@daedalus-project.io:
+                      active: 1
+                      surname: "The Ripper"
+                      name: "John"
+                      is_admin: 0
+                      email: "john@daedalus-project.io"
+                      token: "2GAUDo6402Lg70gBG4z5RRZWqSKDlyvw"
+                    marvin@daedalus-project.io:
+                      email: "marvin@daedalus-project.io"
+                      is_admin: 0,
+                      name: "Marvin"
+                      surname: "The Robot"
+                      active: 0
+                      token: "E2FglGDC3uUv44LARyLIK7QI0ljMiSGH"
+                _hidden_data:
+                  user:
+                    is_super_admin: 1
+                    id: 1
+                  registered_users:
+                    marvin@daedalus-project.io:
+                      id: 3
+                      auth_token: "FNIUcTWuD2QExGrDcg.FbvqwPRg0iOuAd1W/S33S9jizCynW3gzHt6ZkYxLOs2j"
+                      is_super_admin: 0
+                      api_key: "JJ8bEAlqUt4Q3J2TfJTNf38vLs7rS5km"
+                    john@daedalus-project.io:
+                      id: 2
+                      auth_token: "93OgYT6MLHpCdh6iLNNr17BRJflTRO4bcC//mVn6ncogyLInHMkKBn4CAauIe0Lg"
+                      is_super_admin: 0
+                      api_key: "aC3JhLD24ogcSjyMUXUTBh7yIhMjj7xU"
+    '403':
+      description: I said only admins
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "You are not an admin user."
+    '400':
+      description: Requests without session token
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+                enum:
+                  - "No session token provided."
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "Session token invalid."
+            '1':
+              value:
+                status: 0
+                message: "No session token provided."
+            '2':
+              value:
+                status: 0
+                message: "Session token expired."

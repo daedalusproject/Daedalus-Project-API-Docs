@@ -1,0 +1,27 @@
+type: object
+required:
+  - name
+  - surname
+  - e-mail
+  - is_admin
+  - phone
+  - active
+  - token
+  - api_key
+properties:
+  name:
+    type: string
+  surname:
+    type: string
+  e-mail:
+    type: string
+  token:
+    type: string
+  is_admin:
+    type: integer
+  phone:
+    type: integer
+  active:
+    type: integer
+  api_key:
+    type: string

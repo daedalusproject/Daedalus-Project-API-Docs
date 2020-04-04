@@ -1,0 +1,135 @@
+post:
+  operationId: login-user
+  tags:
+    - User
+  summary: User Login
+  description: Users are allowed to log in into Daedalus Core
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - e-mail
+            - password
+          properties:
+            password:
+              type: string
+            e-mail:
+              type: string
+        examples:
+          '0':
+            value:
+              e-mail: admin@daedalus-project.io
+              password: validPa55word_conTaining_Mul7ple_c:h:a:r;s
+  responses:
+    '200':
+      description: If login success, return user data and session token, superadmin users receive _hidden_data.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  session_token:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/LoggedUserData'
+              _hidden_data:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/HiddenUserData'
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+             value:
+              status: 1
+              data:
+                session_token: "eyJhbGciOiJSUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNTM3NzY1MzYwfQ.Rlok8kfLDp3134Frf2RZXqLtB_hRnsRmyLrR8Ni9IfpgdunZSJggiRlwCiCvOAlG0XJUPXLuwF5FP1DcuY3sILUyk0sm_74E_tvGJXrjEaOsbloKCmurmRAvPnrX9PtOqFODO1By-emm0nsnKebz2Mc09b5pmu1wtwI0Qp5SzgeW_-tVyrbANmh2r7FjkuO19ErUU5TnGrjBRURnfIDYEhS6Dd6kwmeqIelEqzkYywHMyaIHvwZaNxn9xO8GFh5Q_ahXp95ZtWkkX904alJlXPPKbp2i42V3ct6CiJC6PfF0UXTCrN7XK3JB8dgc_9gwT1OVK0DuF2UpWCF9eyhRV0BVAMFchLB52lGxzAL5sg3D7uGAED3B9QlSUDddoZbThrJQjxOxQqvWVzE9yJd-Ene92FNIR6OnKp4wXnZU_qFjV-RdhMycPjmdzgZZ71S4Ax1S9BMMxlvSBLiodPo-MxtFlWt2qb49gnXblGf649XML0Jd12-4hY3FzJ54vbOTWRarqQd9wLmlmAZxULk8zF7XMaJy29bCXI53pt5cpm8FsjMY9GubV8GCopj0EvXUJtoaZFgqJsqhAeqHcSd-RHpzLMKL0na04LoOIWQJWfiXe4nfCJDPhZCKV4lCdsScEDTM29L41f4SXTAMZkgPMIyo5G5_PL2U5Jq10iS9_As"
+                user:
+                  name: "Admin"
+                  e-mail: "admin@daedalus-project.io"
+                  active: 1
+                  is_admin: 1
+                  phone: ""
+                  surname: "User"
+                  token: "qARmcz4ZAmGiU8to1V6NREy4DoumgeS7"
+              message: "Auth Successful."
+              _hidden_data:
+                user:
+                  is_super_admin: 1
+                  id: 1
+                  api_key: "jHkE6BcnNNYIQFGlJiYzrRVo6Feypv5p"
+            '1':
+              value:
+                status: 1
+                data:
+                  session_token: "eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE1Mzc3NjY3MDMsImlkIjoyfQ.1ZAu03ug1RjKpAebsaxaRRWiM9fmjQ0y98so3eXuc6h1QuV7fP-AGGmbTJFe-FKEQ5XIQALLI0yejlF2-EMIWfWMupHLVOzjrCqMtzC-fZ3x-2PwOQCUAi-2n9QVC1C8XezeacHBmxbXqdFcU86TKZujpCHHxrLSSIQKMxqk-HeiNBQ9ZmCiKaq3EK9X598VpTFUfItMVGQuoxdFHEAseqa6xT9ZC8vjf8R6AB5rqzoHGfAG2CRkdJ-Jl53mGkeNjnVM_G2K5YDSjAQCSwVHbYL8k_JEhUke7eFsjnaNJ1cZPJDQlGigHc9ue8AVn1LJ_nWx-XiI6xoEq_5SP5y6euspESMko5Zq0uQO5n71P-M8G7GJnEhMF1tlufJCx39CKdtOHAqJwoJyMroYRQ_1dfhz6gCUs85-j_oaejlSgAEORy1FB0Tq7OlMH8BMqlPW2n39eeRyVTs7VEhSEbktp6oYa9gLTaTz91AJtb0Lq6QlN_dZ7g8_PBsUgwRfW-H6aOZ6qBEau1xy-RwL2eN478iexyHn-hckCEWuBJ5S1JLFZm5qnt6yWy9WJGDwJpSyy4xBhWqXeGoerFEaerD_897fCh-xEl9FyB4gVsSey1vapj78r3gPQBe-qa0_kCRQXhH6JV7hZh2e3G-hTTLj55ko0FXCIL9x_rr5ix5mDCc"
+                  user:
+                    name: "John"
+                    surname: "The Ripper"
+                    e-mail: "john@daedalus-project.io"
+                    active: 1
+                    is_admin: 0
+                    phone: ""
+                    token: "Jwm.NuibXnNM.z89c6CHsknxlEXf3UGU"
+                message: "Auth Successful."
+    '400':
+      description: Examples of invalid data
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+                enum:
+                  - 400
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "e-mail is invalid."
+            '1':
+              value:
+                status: 0
+                message: "No e-mail provided. No password provided."
+            '2':
+              value:
+                status: 0
+                message: "e-mail is invalid. No password provided."
+            '3':
+              value:
+                status: 0
+                message: "No password provided."
+    '403':
+      description: Examples of falied login
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                enum:
+                  - "Wrong e-mail or password."
+              status:
+                type: integer
+                enum:
+                  - 403
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "Wrong e-mail or password."

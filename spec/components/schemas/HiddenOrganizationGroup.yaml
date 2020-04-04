@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    type: integer
+  users:
+    type: object
+    properties:
+      data:
+        $ref: '#/components/schemas/UserData'
+      _hidden_data:
+        $ref: '#/components/schemas/HiddenUserData'
+  roles:
+    type: object
+    additionalProperties:
+      type: integer

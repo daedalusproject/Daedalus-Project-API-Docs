@@ -1,0 +1,3 @@
+type: http
+scheme: basic
+description: Once logged, users have to provide their session token for each request. As API uses http_basic for getting user token `Username` field is `session_token` and `password` should be a valid session token.

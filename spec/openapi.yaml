@@ -1,17 +1,17 @@
 openapi: "3.0.0"
 info:
   version: 0.0.1
-  title: Daedalus-Core
+  title: Daedalus Project API Docs
   contact:
-    email: acastellano@daedalus-project.io
-    url: 'https://daedalus-project.io/contact'
+    email: admin@daedalus-project.io
+    url: 'https://daedalus-project.io'
   license:
     name: GNU General Public License 3.0
     url: 'https://www.gnu.org/licenses/gpl-3.0.en.html'
   x-logo:
     url: 'https://apis.guru/openapi-template/logo.png'
   description: |
-    Daedalus Poject Core API specification.
+    Daedalus Poject API specification.
 
     # Introduction
 
@@ -20,11 +20,12 @@ info:
 
 externalDocs:
   description: Daedalus Project Docs
-  url: 'https://readthedocs.org'
+  url: 'https://docs.daedalus-project.io/'
 
 tags:
   - name: Organization
   - name: User
+  - name: Project
 
 servers:
   - url: 'https://api-dev.daedalus-project.io'

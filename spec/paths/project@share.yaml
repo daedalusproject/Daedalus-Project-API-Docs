@@ -1,0 +1,125 @@
+post:
+  operationId: share-project
+  tags:
+    - Project
+  summary: Share project
+  description: Admin users are allowed to share projects with other organizations at role name
+  security:
+    - token_security: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+           - organization_token
+           - organization_to_share_token
+           - project_token
+           - role_name
+          properties:
+            organization_token:
+              type: string
+            organization_to_share_token:
+              type: string
+            project_token:
+              type: string
+            role_name:
+              type: string
+        examples:
+          'Success request.':
+            value:
+              organization_token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
+              organization_to_share_token: "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR"
+              project_token: "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa"
+              role_name: "fireman"
+
+  responses:
+    '200':
+      description: Sucess response.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+                enum:
+                  - 1
+          examples:
+            'Project shared':
+              value:
+                status: 1
+                message: "Project shared."
+    '400':
+      description: Invalid responses.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            'No organization_token provided.':
+              value:
+                status: 0
+                message: "No organization_token provided."
+            'Invalid organization token':
+              value:
+                status: 0
+                message: "Invalid organization token."
+            'Invalid organization token.':
+              value:
+                status: 0
+                message: "Session token invalid."
+            'Invalid project_token.':
+              value:
+                status: 0
+                message: "Invalid project_token."
+            'Invalid role_name.':
+              value:
+                status: 0
+                message: "Invalid role_name."
+            'Expired session token.':
+              value:
+                status: 0
+                message: "Session token expired."
+            'Project already shared.':
+              value:
+                status: 0
+                message: "This project has been already shared with this organization and this role."
+    '403':
+      description: Non admin users are not allowed to create organizations
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+                enum:
+                  - "Your organization roles does not match with the following roles: organization master."
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            'You are not your organization admin':
+              value:
+                status: 0
+                message: "Your organization roles does not match with the following roles: organization master."

@@ -1,0 +1,160 @@
+get:
+  operationId: showusergroupsall-organizations
+  tags:
+    - Organization
+  summary: Show all orgaizations user groups
+  description: Users are allowed to list its organization groups.
+  security:
+    - token_security: []
+  responses:
+    '200':
+      description: Success response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/components/schemas/Organizations'
+              _hidden_data:
+                $ref: '#/components/schemas/HiddenOrganizations'
+          examples:
+            '0':
+              value:
+                status: 1
+                data:
+                  organizations:
+                    "Megashops":
+                      name: "Megashops"
+                      token: "kCZKBk5KvHz5bCX9xwfUOLVvyRbbj5Ku"
+                      groups:
+                        "Megashops Administrators":
+                          users:
+                            "admin@daedalus-project.io":
+                              name: "Admin"
+                              surname: "User"
+                              e-mail: "admin@daedalus-project.io"
+                              is_admin: 1
+                              active: 1
+                              phone: ""
+                              token: "SifmxHz2k4xg5VD0sjU3WmoAk49swtTO"
+                          roles: 
+                            - "organization_master"
+                    "Daedalus Project":
+                      name: "Daedalus Project"
+                      token: "5XJD38czqtm8ieh8TvrBRXlvAD7JM6Nn"
+                      groups:
+                        "Daedalus Super Administrators":
+                          roles: 
+                            - "organization_master"
+                            - "daedalus_manager"
+                          users:
+                            "admin@daedalus-project.io":
+                              name: "Admin"
+                              surname: "User"
+                              e-mail: "admin@daedalus-project.io"
+                              is_admin: 1
+                              active: 1
+                              phone: ""
+                              token: "SifmxHz2k4xg5VD0sjU3WmoAk49swtTO"
+                _hidden_data:
+                  user:
+                    id: 1
+                    is_super_admin: 1
+                  organizations:
+                    "Daedalus Project":
+                      id: 1
+                      groups:
+                        "Daedalus Super Administrators":
+                          id: 2
+                          users:
+                            "admin@daedalus-project.io":
+                              data:
+                                user:
+                                  name: "Admin"
+                                  surname: "User"
+                                  e-mail: "admin@daedalus-project.io"
+                                  phone: ""
+                                  is_admin: 1
+                                  active: 1
+                                  token: "SifmxHz2k4xg5VD0sjU3WmoAk49swtTO"
+                              _hidden_data:
+                                user:
+                                  id: 1
+                                  is_super_admin: 1
+                                  api_key: "jHkE6BcnNNYIQFGlJiYzrRVo6Feypv5p"
+                      roles:
+                        "daedalus_manager": 8
+                        "organization_master": 1
+                    "Megashops":
+                      id: 2
+                      groups:
+                        "Megashops Administrators":
+                          users:
+                            "admin@daedalus-project.io":
+                              data: 
+                                user:
+                                  name: "Admin"
+                                  surname: "User"
+                                  e-mail: "admin@daedalus-project.io"
+                                  phone: ""
+                                  is_admin: 1
+                                  active: 1
+                                  token: "SifmxHz2k4xg5VD0sjU3WmoAk49swtTO"
+                              _hidden_data:
+                                user:
+                                  id: 1
+                                  is_super_admin: 1
+                                  api_key: "jHkE6BcnNNYIQFGlJiYzrRVo6Feypv5p"
+                          roles: 
+                            "organization_master": 1
+            '1':
+              value:
+                status: 1
+                data:
+                  organizations:
+                    "Megashops":
+                        name: "Megashops"
+                        token: "kCZKBk5KvHz5bCX9xwfUOLVvyRbbj5Ku"
+                        groups:
+                          "Megashops Administrators":
+                            users:
+                              "admin@daedalus-project.io":
+                                 name: "Admin"
+                                 surname: "User"
+                                 e-mail: "admin@daedalus-project.io"
+                                 phone: ""
+                                 is_admin: 1
+                                 active: 1
+                                 token: "SifmxHz2k4xg5VD0sjU3WmoAk49swtTO"
+                            roles: 
+                              - "organization_master"
+            '2':
+              value:
+                status: 1
+                data:
+                  organizations:
+                    "Megashops":
+                        name: "Megashops"
+                        token: "kCZKBk5KvHz5bCX9xwfUOLVvyRbbj5Ku"
+                        groups:
+    '400':
+      description: Bad request examples
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "Session token invalid."
+            '1':
+              value:
+                status: 0
+                message: "No session token provided."

@@ -1,0 +1,117 @@
+get:
+  operationId: inactive-user
+  tags:
+    - User
+  summary: Show Inactive Users
+  description: Admin users are allowed its registered user who has not activated their accounts
+  security:
+    - token_security: []
+  responses:
+    '200':
+      description: Success response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - data
+            properties:
+              status:
+                type: integer
+              data:
+                type: object
+                required:
+                  - inactive_users
+                properties:
+                  inactive_users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserData'
+              _hidden_data:
+                type: object
+                properties:
+                  inactive_users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HiddenUserData'
+                  user:
+                    type: object
+                    $ref: '#/components/schemas/HiddenUserData'
+          examples:
+            '0':
+              value:
+                status: 1
+                data:
+                  inactive_users: 
+                    marvin@daedalus-project.io:
+                      name: "Marvin"
+                      surname: "The Robot"
+                      email: "marvin@daedalus-project.io"
+                      active: 0
+                      is_admin: 0
+                      token: "npGAi5LRsK44BmAeasnd28EHdd5q70OA"
+                _hidden_data:
+                  inactive_users:
+                    marvin@daedalus-project.io:
+                      id: 3
+                      auth_token: "FNIUcTWuD2QExGrDcg.FbvqwPRg0iOuAd1W/S33S9jizCynW3gzHt6ZkYxLOs2j"
+                      is_super_admin: 0
+                      api_key: "XE6Q9Ub4VTBaTkw09sdLQVKzI7OjraHt"
+                  user:
+                    is_super_admin: 1
+                    id: 1
+    '403':
+      description: I said only admins
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+                enum:
+                  - "You are not an admin user."
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            '0':
+                value:
+                  status: 0
+                  message: "You are not an admin user."
+    '400':
+      description: Requests without session token
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+                enum:
+                  - "No session token provided."
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "Session token invalid."
+            '1':
+              value:
+                status: 0
+                message: "No session token provided."
+            '2':
+              value:
+                status: 0
+                message: "Session token expired."

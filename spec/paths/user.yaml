@@ -1,0 +1,218 @@
+get:
+  operationId: user
+  tags:
+    - User
+  summary: Show user data
+  description: Sows user data
+  security:
+    - token_security: []
+  responses:
+    '200':
+      description: Examples of success responses
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/LoggedUserData'
+              _hidden_data:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/HiddenUserData'
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 1
+                data:
+                  user:
+                    e-mail: "notanadmin@daedalus-project.io"
+                    name: "NoAdmin"
+                    surname: "User"
+                    token: "IXI1VoS8BiIuRrOGS4HEAOBleJVMflfG"
+                    phone: ""
+                    active: 1
+                    api_key: "lTluauLErCtXhbBdyxfpVHpdodiBaJb"
+                    is_admin: 0
+            '1':
+              value:
+                status: 1
+                data:
+                  user:
+                    e-mail: "admin@daedalus-project.io"
+                    name: "Admin"
+                    surname: "User"
+                    is_admin: 1
+                    api_key: "lTuuauLEKCtXhbBVyxfpVHpdodiBaJb"
+                    phone: ""
+                    active: 1
+                    token: "gDoGxCkNI0DrItDrOzWKjS5tzCHjJTVO"
+                _hidden_data:
+                  user:
+                    id: 1
+                    is_super_admin: 1
+    '400':
+      description: Examples of failed requests because users did not provide their session token or their session token has expired.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "Session token invalid."
+            '1':
+              value:
+                status: 0
+                message: "No session token provided."
+            '2':
+              value:
+                status: 0
+                message: "Session token expired."
+put:
+  operationId: userUpdateData
+  tags:
+    - User
+  summary: Update user data
+  description: Users are allowed to change their name, surname, phone number, and password.
+  security:
+    - token_security: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            password:
+              type: string
+            phone:
+              type: string
+            pass:
+              type: string
+            surname:
+              type: string
+            name:
+              type: string
+        examples:
+          '0':
+            value:
+              name: "Other"
+          '1':
+            value:
+              name": "Other"
+              surname": "Admin"
+          '2':
+            value:
+              surname: "Admin"
+          '3':
+            value:
+              mac_address: "fe80::fdc2:8f3f:dee8:ee87/64"
+          '4':
+            value:
+              phone: "+3496352534478"
+              name: "NewName"
+          '5':
+            value:
+              phone: "+34963525478"
+          '6':
+            value:
+              password: "test"
+          '8':
+            value:
+              password: "passwordddddddddddddd"
+          '9':
+            value:
+              password: "val1d_Pa55w0rd"
+  responses:
+    '200':
+      description: Updates user's data.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 1
+                message: "Data updated: name."
+            '1':
+              value:
+                status: 1
+                message: "Data updated: name."
+            '2':
+              value:
+                status: 1
+                message: "Data updated: name, surname."
+            '3':
+              value:
+                status: 1
+                message: "Data updated: surname."
+            '4':
+              value:
+                status: 1
+            '5':
+              value:
+                status: 1
+                message: "Data updated: name, phone."
+            '6':
+              value:
+                status: 1
+                message: "Data updated: phone."
+            '7':
+              value:
+                status: 1
+            '8':
+              value:
+                status: 1
+                message: "Data updated: password."
+    '400':
+      description: Examples of failed requests.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "No session token provided."
+            '1':
+              value:
+                status: 0
+                message: "Invalid phone."
+            '2':
+              value:
+                status: 0
+                message: "Password is invalid."
+            '3':
+              value:
+                status: 0
+                message: "Password is invalid."
+            '4':
+              value:
+                status: 0
+                message: "Session token expired."

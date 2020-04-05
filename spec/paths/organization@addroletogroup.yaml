@@ -1,0 +1,136 @@
+ post:
+  operationId: addroletogorup-organizations
+  tags:
+    - Organization
+  summary: Add roles to organizations groups
+  description: Admin users are allowed to add roles to its organizations groups
+  security:
+    - token_security: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            role_name:
+              type: string
+            group_token:
+              type: string
+            organization_token:
+              type: string
+        examples:
+          '0':
+            value:
+              organization_token: "kCZKBk5KvHz5bCX9xwfUOLVvyRbbj5Ku"
+          '1':
+            value:
+              organization_token: "5XJD38czqtm8ieh8TvrBRXlvAD7JM6Nn"
+              group_token: "nonexistentgrouptoken"
+          '2':
+            value:
+              organization_token: "5XJD38czqtm8ieh8TvrBRXlvAD7JM6Nn"
+              group_token: "NC5MQoQJjFkaWiQoeHodATK8hTeEyfsk"
+              role_name: "firemen"
+          '3':
+            value:
+              organization_token: "5XJD38czqtm8ieh8TvrBRXlvAD7JM6Nn"
+              group_token: "iBSe0mX3GU6GJPpyGpgKZJ9klPFUACpn"
+              role_name: "firemen"
+  responses:
+    '200':
+      description: Success response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _hidden_data:
+                type: object
+                properties:
+                  organization_group_role:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                  user:
+                    type: object
+                    $ref: '#/components/schemas/HiddenUserData'
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 1
+                message: "Selected role has been added to organization group."
+                _hidden_data:
+                  user:
+                    id: 1
+                    is_super_admin: 1
+                  organization_group_role:
+                    id: 6
+    '400':
+      description: Invalid requests, if user does not belong to required organization API response has 400 code.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            'No organization_token provided.':
+              value:
+                status: 0
+                message: "No organization_token provided."
+            'No group_name provided. No role_name provided.':
+              value:
+                status: 0
+                message: "No group_name provided. No role_name provided."
+            'No role_name provided.':
+              value:
+                status: 0
+                message: "No role_name provided."
+            'Required group does not exist.':
+              value:
+                status: 0
+                message: "Required group does not exist."
+            'Required role does not exist.':
+              value:
+                status: 0
+                message: "Required role does not exist."
+            'Required role is already assigned to this group.':
+              value:
+                status: 0
+                message: "Required role is already assigned to this group."
+            'Session token invalid.':
+              value:
+                status: 0
+                message: "Session token invalid."
+            'No session token provided.':
+              value:
+                status: 0
+                message: "No session token provided."
+            'Session token expired.':
+              value:
+                status: 0
+                message: "Session token expired."
+    '403':
+      description: Non admin requests
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            'User does not have organization master role.':
+              value:
+                status: 0
+                message: "Your organization roles does not match with the following roles: organization master."

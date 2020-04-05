@@ -1,9 +1,9 @@
 post:
-  operationId: create-project
+  operationId: share-project
   tags:
     - Project
-  summary: Create project
-  description: Admin users are allowed to create projects for their organizations
+  summary: Share project
+  description: Admin users are allowed to share projects with other organizations at role name
   security:
     - token_security: []
   requestBody:
@@ -13,56 +13,37 @@ post:
           type: object
           required:
            - organization_token
-           - name
+           - organization_to_share_token
+           - project_token
+           - role_name
           properties:
-            name: 
+            organization_token:
+              type: string
+            organization_to_share_token:
+              type: string
+            project_token:
+              type: string
+            role_name:
               type: string
         examples:
-          '0':
+          'Success request.':
             value:
-              organization_token: "ckrmCk4TMD7zzYeY54eZ1lU09w7taI5L"
-              name: "The project"
+              organization_token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
+              organization_to_share_token: "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR"
+              project_token: "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa"
+              role_name: "fireman"
+
   responses:
     '200':
-      description: Sucess responses, superadmin also receives _hidden_data
+      description: Sucess response.
       content:
         application/json:
           schema:
             type: object
             required:
-              - data
               - message
               - status
             properties:
-              data:
-                type: object
-                required:
-                  - project
-                properties:
-                  project:
-                    type: object
-                    required:
-                      - token
-                      - name
-                    properties:
-                      token:
-                        type: string
-                      name:
-                        type: string
-              _hidden_data:
-                type: object
-                properties:
-                  project:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      organization_owner:
-                        type: integer
-
-                  user:
-                    type: object
-                    $ref: '#/components/schemas/HiddenUserData'
               message:
                 type: string
               status:
@@ -70,23 +51,12 @@ post:
                 enum:
                   - 1
           examples:
-            '0':
+            'Project shared':
               value:
                 status: 1
-                message: "Project Created."
-                data:
-                  project:
-                    token: "ckrmCk4TMD7zzYeY54eZ1lU09w7taI5L"
-                    name: "The Project"
-                _hidden_data:
-                  project:
-                    id: 2
-                    organization_owner: 3
-                  user:
-                    is_super_admin: 1
-                    id: 1
+                message: "Project shared."
     '400':
-      description: Invalid data.
+      description: Invalid responses.
       content:
         application/json:
           schema:
@@ -102,26 +72,34 @@ post:
                 enum:
                   - 0
           examples:
-            'Project already exists':
+            'No organization_token provided.':
               value:
                 status: 0
-                message: "Required project name already exists inside this organization."
+                message: "No organization_token provided."
             'Invalid organization token':
               value:
                 status: 0
                 message: "Invalid organization token."
-            'Invalid session token':
+            'Invalid organization token.':
               value:
                 status: 0
                 message: "Session token invalid."
-            'No seesion token projects':
+            'Invalid project_token.':
               value:
                 status: 0
-                message: "No session token provided."
-            'Expired session token':
+                message: "Invalid project_token."
+            'Invalid role_name.':
+              value:
+                status: 0
+                message: "Invalid role_name."
+            'Expired session token.':
               value:
                 status: 0
                 message: "Session token expired."
+            'Project already shared.':
+              value:
+                status: 0
+                message: "This project has been already shared with this organization and this role."
     '403':
       description: Non admin users are not allowed to create organizations
       content:

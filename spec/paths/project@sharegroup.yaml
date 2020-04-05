@@ -102,10 +102,6 @@ post:
               value:
                 status: 0
                 message: "This group has already been added to this shared project."
-            'Group already added.':
-              value:
-                status: 0
-                message: "This group has already been added to this shared project."
             'Selected organization group does not have same role as project role sharing.':
               value:
                 status: 0

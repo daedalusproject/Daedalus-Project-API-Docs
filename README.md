@@ -1,26 +1,18 @@
-# Daedalus Project OpenAPI Specification
-[![Build Status](https://travis-ci.com/daedalusproject/Daedalus-Project-API-Docs.svg?branch=master)](https://travis-ci.com/daedalusproject/Daedalus-Project-API-Docs)
-## Steps to finish
-
-1. Enable [Travis](https://docs.travis-ci.com/user/getting-started/#To-get-started-with-Travis-CI%3A) for your repository (**note**: you already have `.travis.yml` file)
-1. [Create GitHub access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/); select `public_repo` on `Select scopes` section.
-1. Use the token value as a value for [Travis environment variable](https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings) with the name `GH_TOKEN`
-1. Make a test commit to trigger CI: `git commit --allow-empty -m "Test Travis CI" && git push`
-1. Wait until Travis build is finished. You can check progress by clicking on the `Build Status` badge at the top
-1. **[Optional]** You can setup [custom domain](https://help.github.com/articles/using-a-custom-domain-with-github-pages/) (just create `web/CNAME` file)
-1. **[Optional]** If your API is public consider adding it into [APIs.guru](https://APIs.guru) directory using [this form](https://apis.guru/add-api/).
-1. Delete this section ❌
+# Daedalus-Core OpenAPI Specification
+[![pipeline status](https://git.daedalus-project.io/docs/Daedalus-Core-Docs/badges/master/pipeline.svg)](https://git.daedalus-project.io/docs/Daedalus-Core-Docs/commits/master)[![Build Status](https://travis-ci.org/daedalusproject/Daedalus-Core-Docs.svg?branch=master)](https://travis-ci.org/daedalusproject/Daedalus-Core-Docs)
 
 ## Links
 
-- [Reference Documentation (ReDoc)](https://daedalusproject.github.io/Daedalus-Project-API-Docs/)
-- [SwaggerUI](https://daedalusproject.github.io/Daedalus-Project-API-Docs/swagger-ui/)
-- OpenAPI Raw Files: [JSON](https://daedalusproject.github.io/Daedalus-Project-API-Docs/openapi.json) [YAML](https://daedalusproject.github.io/Daedalus-Project-API-Docs/openapi.yaml)
+- [Reference Documentation (ReDoc)](https://daedalusproject.github.io/Daedalus-Core-Docs/)
+- OpenAPI Raw Files: [JSON](https://daedalusproject.github.io/Daedalus-Core-Docs/openapi.json) [YAML](https://daedalusproject.github.io/Daedalus-Core-Docs/openapi.yaml)
 
-**Warning:** All above links are updated only after Travis CI finishes deployment
+## Docker Image
 
-## Working on specification
-### Install
+Release Image [![Release Image](https://img.shields.io/badge/docker-latest-blue.svg)](https://hub.docker.com/r/daedalusproject/daedalus-core-docs)
+
+Develop [![Develop](https://img.shields.io/badge/docker-latest-yellow.svg)](https://hub.docker.com/r/daedalusproject/daedalus-core-docs-develop)
+
+## Manual Install
 
 1. Install [Node JS](https://nodejs.org/)
 2. Clone repo and run `npm install` in the repo root

@@ -1,0 +1,113 @@
+get:
+  operationId: orphan-user
+  tags:
+    - User
+  summary: Show Registered Users
+  description: Admin users are allowed to see registers users without any organization
+  security:
+    - token_security: []
+  responses:
+    '200':
+      description: Success response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - status
+            properties:
+              status:
+                type: integer
+              data:
+                type: object
+                required:
+                  - inactive_users
+                properties:
+                  inactive_users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserData'
+              _hidden_data:
+                type: object
+                properties:
+                  inactive_users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HiddenUserData'
+                  user:
+                    type: object
+                    $ref: '#/components/schemas/HiddenUserData'
+          examples:
+            '0':
+              value:
+                status: 1
+                data:
+                  orphan_users:
+                    john@daedalus-project.io:
+                      active: 1
+                      surname: "The Ripper"
+                      name: "John"
+                      is_admin: 0
+                      email: "john@daedalus-project.io"
+                      token: "gtrtRLWPW4IzKEVBPo1arnqzvs2ZJCbg"
+                _hidden_data:
+                  orphan_users:
+                    john@daedalus-project.io:
+                      id: 2
+                      auth_token: "93OgYT6MLHpCdh6iLNNr17BRJflTRO4bcC//mVn6ncogyLInHMkKBn4CAauIe0Lg"
+                      is_super_admin: 0
+                      api_key: "EvKXGYoCwGzMXP8Aqm5UN8qhQ1UYuijr"
+                  user:
+                    is_super_admin: 1
+                    id: 1
+    '403':
+      description: Only admin users
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "You are not an admin user."
+    '400':
+      description: Requests without session token
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+                enum:
+                  - "No session token provided."
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "Session token invalid."
+            '1':
+              value:
+                status: 0
+                message: "No session token provided."
+            '2':
+              value:
+                status: 0
+                message: "Session token expired."

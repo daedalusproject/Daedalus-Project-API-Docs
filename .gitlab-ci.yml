@@ -23,7 +23,7 @@ build_api_docs:
 
 deploy_develop_image:
     stage: deploy
-    image: daedalusproject/base_docker:201907020406
+    image: daedalusproject/base_docker
     script:
         - IMAGENAME=daedalus-core-docs-develop
         - RELEASEDATE=$(date)
@@ -42,7 +42,7 @@ deploy_develop_image:
 
 deploy_release_image:
     stage: deploy
-    image: daedalusproject/base_docker:201907020406
+    image: daedalusproject/base_docker
     script:
         - IMAGENAME=daedalus-core-docs
         - RELEASEDATE=$(date)

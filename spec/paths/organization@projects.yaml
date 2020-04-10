@@ -1,5 +1,5 @@
  get:
-  operationId: show-organizations
+  operationId: show-organization-projects
   tags:
     - Organization
   summary: Show organizations

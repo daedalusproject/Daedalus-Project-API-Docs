@@ -1,0 +1,51 @@
+ get:
+  operationId: show-user-projects
+  tags:
+    - Project
+  summary: Show user's shared projects
+  description: Users are allowed to show projects whose have access.
+  security:
+    - token_security: []
+  responses:
+    '200':
+      description: Success request, get projects.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - status
+            properties:
+              status:
+                type: integer
+              data:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        organization_owner:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            token:
+                              type: string
+                        shared_groups_info:
+                          type: object
+                          properties:
+                            group_name:
+                              type: string
+                            roles:
+                              type: array
+                              items:
+                                type: string
+                            users:
+                              type: array
+                              items:
+                                type: string

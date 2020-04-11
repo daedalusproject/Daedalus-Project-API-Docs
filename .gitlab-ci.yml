@@ -5,14 +5,14 @@ stages:
 
 test_redoc:
     stage: test
-    image: daedalusproject/base_node12
+    image: daedalusproject/base_node12:202004061805
     script:
         - npm install
         - npm test
 
 build_api_docs:
     stage: build
-    image: daedalusproject/base_node12
+    image: daedalusproject/base_node12:202004061805
     script:
         - npm install
         - npm run build
@@ -23,7 +23,7 @@ build_api_docs:
 
 deploy_develop_image:
     stage: deploy
-    image: daedalusproject/base_docker
+    image: daedalusproject/base_docker:202004061805
     script:
         - IMAGENAME=daedalus-core-docs-develop
         - RELEASEDATE=$(date)
@@ -42,7 +42,7 @@ deploy_develop_image:
 
 deploy_release_image:
     stage: deploy
-    image: daedalusproject/base_docker
+    image: daedalusproject/base_docker:202004061805
     script:
         - IMAGENAME=daedalus-core-docs
         - RELEASEDATE=$(date)

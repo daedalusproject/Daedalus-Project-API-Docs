@@ -40,7 +40,6 @@
                       properties:
                         id:
                           type: integer
-
                   user:
                     type: object
                     $ref: '#/components/schemas/HiddenUserData'

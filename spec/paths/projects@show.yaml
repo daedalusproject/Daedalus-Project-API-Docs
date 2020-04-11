@@ -49,4 +49,178 @@
                               type: array
                               items:
                                 type: string
-
+              _hidden_data:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    $ref: '#/components/schemas/HiddenUserData'
+                  projects:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        shared_groups:
+                          type: array
+                          items:
+                            type: integer
+                        organization_owner:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                        id:
+                          type: integer
+                        shared_groups_info:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              roles:
+                                type: array
+                                items:
+                                  type: integer
+                              organization_id:
+                                type: integer
+                              id:
+                                type: integer
+                              users:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    data:
+                                      type: object
+                                      $ref: '#/components/schemas/User'
+                                    _hidden_data:
+                                      type: object
+                                      $ref: '#/components/schemas/HiddenUserData'
+          examples:
+            '0':
+              data:
+                projects:
+                  eqQjUNiV7jwVQDGRyPndGadnnBqktlWa:
+                    organization_owner:
+                      token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
+                      name": "Supershops"
+                    shared_groups_info:
+                      elNmbZD8TgyJlkwYBSEjJFWH4i0gIRK1:
+                        group_name: "SysAdmins Administrators"
+                        users:
+                          - "admin@daedalus-project.io"
+                          - "admin@sysadmins.com"
+                        token: "elNmbZD8TgyJlkwYBSEjJFWH4i0gIRK1"
+                        roles:
+                          - "organization_master"
+                      4WGY6EsgtyHLz8pq4qsHSLovbba2qWA4:
+                        group_name: "L1 group"
+                        users:
+                          - "nonadmin@sysadmins.com"
+                        token: "4WGY6EsgtyHLz8pq4qsHSLovbba2qWA4"
+                        roles:
+                          - "fireman"
+                    name: "Megashops Blog"
+                    token: "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa"
+              _hidden_data:
+                projects:
+                  "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa":
+                    organization_owner:
+                      id: 2
+                    shared_groups_info:
+                      "4":
+                        roles:
+                          organization_master: 1
+                        users:
+                          "admin@daedalus-project.io":
+                            data:
+                              user:
+                                active: 1
+                                phone: ""
+                                surname: "daedalus"
+                                e-mail": "admin@daedalus-project.io"
+                                token": ""
+                                is_admin": 1
+                                name": "admin"
+                            _hidden_data:
+                              user:
+                                is_super_admin: 1
+                                id: 1
+                                api_key: "e3eY5.hw1LLJvuXMa8QdzqudcFdEIe."
+                          "admin@sysadmins.com":
+                            data:
+                              user:
+                                token: "nDrvxTErdsoJEgcq7eH5cH5AfQH8AK10"
+                                is_admin: 1
+                                name: "Admin"
+                                e-mail: "admin@sysadmins.com"
+                                surname: "Sysadmin"
+                                phone: ""
+                                active: 1
+                            _hidden_data:
+                              user:
+                                api_key: "NwxHLn7d37XmniPItvgzDMUpOkPsCoJ5"
+                                is_super_admin: 0
+                                id: 6
+                        organization_id: 3
+                        id: 4
+                      "5":
+                        id: 5
+                        roles:
+                          fireman: 6
+                        organization_id: 3
+                        users:
+                          "nonadmin@sysadmins.com":
+                            _hidden_data:
+                              user:
+                                api_key: "YvzjvQLhPAjygaDoy6Oiwp1RGNhMbsqZ"
+                                is_super_admin: 0
+                                id: 7
+                            data:
+                              user:
+                                name: "NonAdmin"
+                                is_admin: 0
+                                token: "mBJk8sQUniySPcq5zWNtYZyX11Fi58k2"
+                                e-mail: "nonadmin@sysadmins.com"
+                                surname: "Sysadmin"
+                                phone: ""
+                                active: 1
+                    id: 1
+                    shared_groups:
+                      - 4
+                      - 5
+                user:
+                  api_key: "e3eY5.hw1LLJvuXMa8QdzqudcFdEIe."
+                  is_super_admin: 1
+                  id: 1
+              status: 1
+    '400':
+      description: Requests without session token
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+                enum:
+                  - "No session token provided."
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            '0':
+              value:
+                status: 0
+                message: "Session token invalid."
+            '1':
+              value:
+                status: 0
+                message: "No session token provided."
+            '2':
+              value:
+                status: 0
+                message: "Session token expired."

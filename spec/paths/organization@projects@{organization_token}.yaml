@@ -1,0 +1,68 @@
+ parameters:
+  - name: organization_token
+    in: path
+    description: Organization Token
+    required: true
+    schema:
+      type: string
+get:
+  operationId: show-organization-projects
+  tags:
+    - Organization
+  summary: Show organization projects
+  description: Admin users are allowed to view their organization projects
+  security:
+    - token_security: []
+  responses:
+    '200':
+      description: Success response show projects
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - status
+            properties:
+              status:
+                type: integer
+              data:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        token:
+                          type: string
+                        shared_with:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              organization_name:
+                                type: string
+                              token:
+                                type: string
+                              shared_roles:
+                                type: array
+                                items:
+                                  type: string
+              _hidden_data:
+                type: object
+                properties:
+                  organizations:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - id
+                      properties:
+                        id:
+                          type: integer
+                  user:
+                    type: object
+                    $ref: '#/components/schemas/HiddenUserData'

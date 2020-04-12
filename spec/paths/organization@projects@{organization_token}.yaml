@@ -81,64 +81,64 @@ get:
                     $ref: '#/components/schemas/HiddenUserData'
 
           examples:
-                'Successful request made by admin user':
-                  value:
-                    status: 1
-                    data:
-                      projects:
-                        "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa"
-                          token: "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa"
-                          name: "Megashops Blog"
-                          shared_with:
-                            "KZtjIoCcgoeklYR1HESnNM143GaWUdMU":
-                              shared_roles:
-                                - "fireman"
-                              token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
-                              organization_name: "Supershops"
-                            "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR":
-                              token: "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR"
-                              shared_roles:
-                                - "fireman"
-                                - "expenses_watcher"
-                                - "organization_master"
-                              organization_name: "SysAdmins"
-                'Successful request made by superadmin user':
-                  value:
-                    status: 1
-                    _hidden_data:
-                      user:
-                        is_super_admin: 1
-                        api_key: "e3eY5.hw1LLJvuXMa8QdzqudcFdEIe."
-                        id: 1
-                      projects:
-                        "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa":
-                          id: 1
-                          shared_with:
-                            "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR"
-                              shared_roles:
-                                "1": "organization_master"
-                                "6":"fireman"
-                                "4":"expenses_watcher"
-                              id: 3
-                            "KZtjIoCcgoeklYR1HESnNM143GaWUdMU":
-                              id: 2
-                              shared_roles:
-                                "6": "fireman"
-                    data:
-                      projects:
-                        "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa":
-                          name: "Megashops  Blog"
-                          token: "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa"
-                          shared_with:
-                            "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR":
-                              token: "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR"
-                              shared_roles:
-                                - "fireman"
-                                - "expenses_watcher"
-                                - "organization_master"
-                              organization_name: "SysAdmins"
-                            "KZtjIoCcgoeklYR1HESnNM143GaWUdMU":
-                              organization_name: "Supershops"
-                              token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
-                              shared_roles:
-                                - "fireman"
+            'Successful request made by admin user':
+              value:
+                status: 1
+                data:
+                  projects:
+                      "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa":
+                      token: "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa"
+                      name: "Megashops Blog"
+                      shared_with:
+                        "KZtjIoCcgoeklYR1HESnNM143GaWUdMU":
+                          shared_roles:
+                            - "fireman"
+                          token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
+                          organization_name: "Supershops"
+                        "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR":
+                          token: "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR"
+                          shared_roles:
+                            - "fireman"
+                            - "expenses_watcher"
+                            - "organization_master"
+                          organization_name: "SysAdmins"
+            'Successful request made by superadmin user':
+              value:
+                status: 1
+                _hidden_data:
+                  user:
+                    is_super_admin: 1
+                    api_key: "e3eY5.hw1LLJvuXMa8QdzqudcFdEIe."
+                    id: 1
+                  projects:
+                    "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa":
+                      id: 1
+                      shared_with:
+                        "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR":
+                          shared_roles:
+                            "1": "organization_master"
+                            "6":"fireman"
+                            "4":"expenses_watcher"
+                          id: 3
+                        "KZtjIoCcgoeklYR1HESnNM143GaWUdMU":
+                          id: 2
+                          shared_roles:
+                            "6": "fireman"
+                data:
+                  projects:
+                    "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa":
+                      name: "Megashops  Blog"
+                      token: "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa"
+                      shared_with:
+                        "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR":
+                          token: "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR"
+                          shared_roles:
+                            - "fireman"
+                            - "expenses_watcher"
+                            - "organization_master"
+                          organization_name: "SysAdmins"
+                        "KZtjIoCcgoeklYR1HESnNM143GaWUdMU":
+                          organization_name: "Supershops"
+                          token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
+                          shared_roles:
+                            - "fireman"

@@ -116,14 +116,18 @@ get:
                       shared_with:
                         "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR":
                           shared_roles:
-                            "1": "organization_master"
-                            "6":"fireman"
-                            "4":"expenses_watcher"
+                            "1":
+                              "organization_master"
+                            "6":
+                              "fireman"
+                            "4":
+                              "expenses_watcher"
                           id: 3
                         "KZtjIoCcgoeklYR1HESnNM143GaWUdMU":
                           id: 2
                           shared_roles:
-                            "6": "fireman"
+                            "6":
+                              "fireman"
                 data:
                   projects:
                     "eqQjUNiV7jwVQDGRyPndGadnnBqktlWa":
@@ -142,3 +146,47 @@ get:
                           token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
                           shared_roles:
                             - "fireman"
+    '400':
+      description: If user does not belong to required organization, API response does not return if organization_token exists or not.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            'Invalid organization token.':
+              value:
+                status: 0
+                message: "Invalid organization token."
+            'Session token invalid.':
+              value:
+                status: 0
+                message: "Session token invalid."
+            'No session token provided.':
+              value:
+                status: 0
+                message: "No session token provided."
+            'Session token expired.':
+              value:
+                status: 0
+                message: "Session token expired."
+    '403':
+      description: If user belongs to required organization API response is forbidden.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+          examples:
+            'Not admin user tries to make ':
+              value:
+                status: 0
+                message: "Your organization roles does not match with the following roles: organization master."

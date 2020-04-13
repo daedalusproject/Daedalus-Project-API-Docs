@@ -1,0 +1,121 @@
+parameters:
+  - name: organization_token
+    in: path
+    description: Organization Token
+    required: true
+    schema:
+      type: string
+get:
+  operationId: show-projects-shared-with-organization
+  tags:
+    - Project
+  summary: Show projects shared with organization
+  description: Admin users are allowed to view which projects are shared with their organization.
+  security:
+    - token_security: []
+  responses:
+    '200':
+      description: Success response show projects
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - status
+            properties:
+              status:
+                type: integer
+              data:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        organization_owner:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            token:
+                              type: string
+                        shared_roles:
+                          type: array
+                          items:
+                            type: string
+                        shared_groups_info:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              group_name:
+                                type: string
+                              roles:
+                                type: array
+                                items:
+                                  type: string
+                              users:
+                                type: object
+                                $ref: '#/components/schemas/UserData'
+                              token:
+                                type: string
+                        token:
+                          type: string
+              _hidden_data:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - id
+                      properties:
+                        shared_groups:
+                          type: array
+                          items:
+                            type: integer
+                        organization_owner:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                        id:
+                          type: integer
+                        shared_roles:
+                          type: array
+                          items:
+                            type: object
+                            $ref: '#/components/schemas/HiddenSharedRolesData'
+                        shared_groups_info:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              roles:
+                                type: array
+                                items:
+                                  type: object
+                                  $ref: '#/components/schemas/HiddenSharedRolesIDData'
+                              organization_id:
+                                type: integer
+                              id:
+                                type: integer
+                              users:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    data:
+                                      type: object
+                                      $ref: '#/components/schemas/UserData'
+                                    _hidden_data:
+                                      type: object
+                                      $ref: '#/components/schemas/HiddenUserData'
+                  user:
+                    type: object
+                    $ref: '#/components/schemas/HiddenUserData'

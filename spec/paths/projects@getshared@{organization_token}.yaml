@@ -126,7 +126,7 @@ get:
                     type: object
                     $ref: '#/components/schemas/HiddenUserData'
           examples:
-            'Success response':
+            "Success response":
               value:
                 status: 1
                 data:
@@ -203,7 +203,7 @@ get:
                         token: "cnYXfKLhTIgYxX7zHZLYjEAL1k8UhtvW"
                       shared_roles:
                         - "maze_master"
-          'Success response with hidden data':
+            "Success response with hidden data":
               value:
                 status: 1
                 data:
@@ -285,7 +285,7 @@ get:
                     is_super_admin: 1
                     api_key: "lTuuauLEKCtXhbBVyxfpVHpdodiBaJb"
                     id: 1
-                  projects": {
+                  projects:
                     "igcSJAryn0ZoK7tns9StDJwU4mi1Wcpj":
                       id: 3
                       shared_groups_info:

@@ -119,3 +119,80 @@ get:
                   user:
                     type: object
                     $ref: '#/components/schemas/HiddenUserData'
+          examples:
+            'Success response'
+              status: 1
+              data:
+                projects:
+                  "oqu2eeCee2Amae6Aijo7tei5woh4jiet":
+                    shared_groups_info:
+                      "dbdEzHFCzAlU8fAuKskL7mPT0q3a1GKI":
+                        group_name: "Mega Shop healers"
+                        token: "dbdEzHFCzAlU8fAuKskL7mPT0q3a1GKI"
+                        users:
+                          "marvin@megashops.com":
+                            is_admin: 0
+                            active: 1
+                            e-mail: "marvin@megashops.com"
+                            surname: "Robot"
+                            token: "bBRVZCmo2vAQjjSLXGBiz324Qya4h3pC"
+                            phone: ""
+                            name: "Marvin"
+                        roles:
+                          - "health_watcher"
+                    name: "Mega Shops e-commerce"
+                    token": "oqu2eeCee2Amae6Aijo7tei5woh4jiet"
+                    shared_roles:
+                      - "health_watcher"
+                    organization_owner:
+                      name: "Mega Shops"
+                      token: "ljMPXvVHZZQTbXsaXWA2kgSWzL942Puf"
+                  "6Mb96vGMTS7WIWBwxWs3EVKIY20IlphO":
+                    organization_owner:
+                      name: "Globex"
+                      token: "AUDBO7LQvpFciDhfuApGkVbpYQqJVFV3"
+                    shared_roles:
+                      - "project_caretaker"
+                      - "maze_master"
+                      - "health_watcher"
+                    name: "Arcturus Project"
+                    shared_groups_info:
+                      "dbdEzHFCzAlU8fAuKskL7mPT0q3a1GKI":
+                        group_name: "Mega Shop healers"
+                        token: "dbdEzHFCzAlU8fAuKskL7mPT0q3a1GKI"
+                        users:
+                          "marvin@megashops.com":
+                            name: "Marvin"
+                            token: "bBRVZCmo2vAQjjSLXGBiz324Qya4h3pC"
+                            phone: ""
+                            surname: "Robot"
+                            is_admin: 0
+                            active: 1
+                            e-mail: "marvin@megashops.com"
+                        roles:
+                          - "health_watcher"
+                    token": "6Mb96vGMTS7WIWBwxWs3EVKIY20IlphO"
+                  "igcSJAryn0ZoK7tns9StDJwU4mi1Wcpj":
+                    token: "igcSJAryn0ZoK7tns9StDJwU4mi1Wcpj"
+                    shared_groups_info:
+                      "V6T2M3bxcG8yNaM654z0Xf7MbQqnBrAH":
+                        group_name: "Mega Shop Sysadmins"
+                        token: "V6T2M3bxcG8yNaM654z0Xf7MbQqnBrAH"
+                        roles:
+                          - "fireman"
+                          - "maze_master"
+                        users:
+                          "noadmin@megashops.com":
+                            name: "No Admin"
+                            token: "03QimYFYtn2O2c0WvkOhUuN4c8gJKOkt"
+                            phone: ""
+                            surname: "User"
+                            e-mail: "noadmin@megashops.com"
+                            active: 1
+                            is_admin: 0
+                    name: "Bugs e-commerce"
+                    organization_owner:
+                      name: "Bugs Tech"
+                      token: "cnYXfKLhTIgYxX7zHZLYjEAL1k8UhtvW"
+                    shared_roles:
+                      - "maze_master"

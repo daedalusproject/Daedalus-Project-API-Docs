@@ -92,19 +92,19 @@ get:
               status:
                 type: integer
           examples:
-            '0':
+            'Invalid organization token.':
               value:
                 status: 0
                 message: "Invalid organization token."
-            '1':
+            'Session token invalid.':
               value:
                 status: 0
                 message: "Session token invalid."
-            '2':
+            'No session token provided.':
               value:
                 status: 0
                 message: "No session token provided."
-            '3':
+            'Session token expired.':
               value:
                 status: 0
                 message: "Session token expired."
@@ -120,7 +120,7 @@ get:
               status:
                 type: integer
           examples:
-            '0':
+            'Not admin user tries to make ':
               value:
                 status: 0
                 message: "Your organization roles does not match with the following roles: organization master."

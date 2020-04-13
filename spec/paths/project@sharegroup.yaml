@@ -1,0 +1,131 @@
+post:
+  operationId: share-project-group
+  tags:
+    - Project
+  summary: Select group to manage shared project
+  description: Admin users are allowed to choose which group is allowed to manage shared project. Group must have the shared role assigned to manage project.
+  security:
+    - token_security: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+           - organization_token
+           - shared_project_token
+           - group_token
+          properties:
+            organization_token:
+              type: string
+            organization_to_share_token:
+              type: string
+            project_token:
+              type: string
+            role_name:
+              type: string
+        examples:
+          'Success request.':
+            value:
+              organization_token: "KZtjIoCcgoeklYR1HESnNM143GaWUdMU"
+              shared_project_token: "uZrg6opsw58rM2SzYsyYCusLCmzXaHmR"
+              group_token: "elNmbZD8TgyJlkwYBSEjJFWH4i0gIRK1"
+
+  responses:
+    '200':
+      description: Sucess response.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+                enum:
+                  - 1
+          examples:
+            'Project shared':
+              value:
+                status: 1
+                message: "Group added to shared project."
+    '400':
+      description: Invalid responses.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            'No organization_token provided.':
+              value:
+                status: 0
+                message: "No organization_token provided."
+            'Invalid organization token':
+              value:
+                status: 0
+                message: "Invalid organization token."
+            'Invalid organization token.':
+              value:
+                status: 0
+                message: "Session token invalid."
+            'Invalid shared_project_token.':
+              value:
+                status: 0
+                message: "Invalid shared_project_token."
+            'No group_token provided.':
+              value:
+                status: 0
+                message: "No group_token provided."
+            'Expired session token.':
+              value:
+                status: 0
+                message: "Session token expired."
+            'Invalid group_token.':
+              value:
+                status: 0
+                message: "Invalid group_token."
+            'Group already added.':
+              value:
+                status: 0
+                message: "This group has already been added to this shared project."
+            'Selected organization group does not have same role as project role sharing.':
+              value:
+                status: 0
+                message: "Project not shared with any of the roles of this group."
+    '403':
+      description: Non admin users are not allowed to create organizations
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - status
+            properties:
+              message:
+                type: string
+                enum:
+                  - "Your organization roles does not match with the following roles: organization master."
+              status:
+                type: integer
+                enum:
+                  - 0
+          examples:
+            'You are not your organization admin':
+              value:
+                status: 0
+                message: "Your organization roles does not match with the following roles: organization master."
